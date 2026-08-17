@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+int main() 
+{
+    int recv[7], calc[3], err_pos = 0;
+
+    printf("Enter 7-bit received Hamming code (bit 1 to 7):\n");
+    for (int i = 0; i < 7; i++)
+ {
+        scanf("%d", &recv[i]);
+    }
+    calc[0] = recv[0] ^ recv[2] ^ recv[4] ^ recv[6]; 
+    calc[1] = recv[1] ^ recv[2] ^ recv[5] ^ recv[6]; 
+    calc[2] = recv[3] ^ recv[4] ^ recv[5] ^ recv[6]; 
+    err_pos = calc[0] * 1 + calc[1] * 2 + calc[2] * 4;
+
+    if (err_pos == 0) 
+{
+        printf("\nNo error in the received data.\n");
+    } 
+  else
+{
+        printf("\nError detected at position: %d\n", err_pos);
+        recv[err_pos - 1] = !recv[err_pos - 1];
+        
+        printf("Corrected code: ");
+        for (int i = 0; i < 7; i++)
+ {
+            printf("%d ", recv[i]);
+        }
+        printf("\n");
+    }
+
+}
