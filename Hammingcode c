@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+int main()
+{
+    int data[5];
+    int hamming[8] = {0};
+
+    printf("Enter 4 data bits one by one (0 or 1):\n");
+
+    // Input 4 data bits
+    for (int i = 1; i <= 4; i++)
+    {
+        printf("Data bit D%d: ", i);
+        scanf("%d", &data[i]);
+    }
+
+    // Place data bits
+    hamming[3] = data[1];
+    hamming[5] = data[2];
+    hamming[6] = data[3];
+    hamming[7] = data[4];
+
+    // Calculate parity bits
+    hamming[1] = hamming[3] ^ hamming[5] ^ hamming[7];
+    hamming[2] = hamming[3] ^ hamming[6] ^ hamming[7];
+    hamming[4] = hamming[5] ^ hamming[6] ^ hamming[7];
+
+    // Display Hamming code
+    printf("\n--- Sender Side Output ---\n");
+    printf("Generated 7-bit Hamming code is: ");
+
+    for (int i = 1; i <= 7; i++)
+    {
+        printf("%d ", hamming[i]);
+    }
+
+    printf("\n");
+
+    return 0;
+}
